@@ -1,0 +1,5 @@
+FROM busybox:latest
+
+COPY ./date.txt /tmp/date.txt
+
+RUN cat /tmp/date.txt

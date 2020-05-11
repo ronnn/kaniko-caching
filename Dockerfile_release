@@ -1,0 +1,17 @@
+ARG from
+ARG base
+
+FROM ${from} AS build
+
+FROM ${base}
+
+# CACHE FALSE-POSITIVE
+COPY --from=build /tmp/date.txt /tmp/date.txt
+COPY ./date.txt /tmp/date-direct.txt
+
+# Cache working as expected
+# COPY ./date.txt /tmp/date-direct.txt
+# COPY --from=build /tmp/date.txt /tmp/date.txt
+
+RUN cat /tmp/date-direct.txt
+RUN cat /tmp/date.txt
